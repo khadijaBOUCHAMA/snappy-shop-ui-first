@@ -1,18 +1,20 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/context/CartContext";
-import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import { ShoppingCart, Menu, X, Search, LogIn, Sun, Moon, UserRound } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 const Navbar: React.FC = () => {
   const { totalItems } = useCart();
+  const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-background shadow-sm border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -22,16 +24,16 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-600 hover:text-shop-blue">
+            <Link to="/" className="text-foreground hover:text-shop-blue">
               Home
             </Link>
-            <Link to="/products" className="text-gray-600 hover:text-shop-blue">
+            <Link to="/products" className="text-foreground hover:text-shop-blue">
               Products
             </Link>
-            <Link to="/about" className="text-gray-600 hover:text-shop-blue">
+            <Link to="/about" className="text-foreground hover:text-shop-blue">
               About
             </Link>
-            <Link to="/orders" className="text-gray-600 hover:text-shop-blue">
+            <Link to="/orders" className="text-foreground hover:text-shop-blue">
               Orders
             </Link>
           </nav>
@@ -72,6 +74,38 @@ const Navbar: React.FC = () => {
               </Button>
             </Link>
             
+            {/* Theme Toggle */}
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              title={theme === 'dark' ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+
+            {/* Profile */}
+            <Link to="/profile">
+              <Button variant="ghost" size="icon">
+                <UserRound className="h-5 w-5" />
+              </Button>
+            </Link>
+
+            {/* Auth Buttons - Desktop */}
+            <div className="hidden md:flex space-x-2">
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/login">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  Connexion
+                </Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link to="/signup">
+                  Inscription
+                </Link>
+              </Button>
+            </div>
+            
             {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
@@ -98,35 +132,54 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden py-4 space-y-3 animate-fade-in bg-white">
+          <nav className="md:hidden py-4 space-y-3 animate-fade-in bg-background">
             <Link 
               to="/" 
-              className="block px-2 py-1 text-gray-600 hover:text-shop-blue"
+              className="block px-2 py-1 text-foreground hover:text-shop-blue"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               to="/products" 
-              className="block px-2 py-1 text-gray-600 hover:text-shop-blue"
+              className="block px-2 py-1 text-foreground hover:text-shop-blue"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </Link>
             <Link 
               to="/about" 
-              className="block px-2 py-1 text-gray-600 hover:text-shop-blue"
+              className="block px-2 py-1 text-foreground hover:text-shop-blue"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link 
               to="/orders" 
-              className="block px-2 py-1 text-gray-600 hover:text-shop-blue"
+              className="block px-2 py-1 text-foreground hover:text-shop-blue"
               onClick={() => setMobileMenuOpen(false)}
             >
               Orders
             </Link>
+            <Link 
+              to="/profile" 
+              className="block px-2 py-1 text-foreground hover:text-shop-blue"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Profile
+            </Link>
+            <div className="flex space-x-2 px-2 py-1">
+              <Button variant="outline" size="sm" asChild className="flex-1">
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                  Connexion
+                </Link>
+              </Button>
+              <Button size="sm" asChild className="flex-1">
+                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                  Inscription
+                </Link>
+              </Button>
+            </div>
           </nav>
         )}
       </div>

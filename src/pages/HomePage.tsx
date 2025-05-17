@@ -12,14 +12,14 @@ const HomePage: React.FC = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-shop-lightGray py-12 md:py-24">
+      <section className="bg-muted py-12 md:py-24">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/2 space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold text-shop-black">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
                 Découvrez les Meilleurs Produits Électroniques
               </h1>
-              <p className="text-lg text-shop-darkGray">
+              <p className="text-lg text-muted-foreground">
                 Des smartphones aux ordinateurs portables, trouvez les dernières technologies à des prix compétitifs avec une livraison rapide.
               </p>
               <div className="flex gap-4">
@@ -64,29 +64,29 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-12 bg-shop-lightGray">
+      <section className="py-12 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">Parcourir par catégorie</h2>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link to="/products?category=smartphone" className="relative overflow-hidden rounded-lg group">
-              <div className="aspect-square bg-gray-200 flex items-center justify-center">
-                <span className="text-2xl font-bold text-shop-black group-hover:text-shop-blue transition-colors">Smartphones</span>
+              <div className="aspect-square bg-card flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground group-hover:text-shop-blue transition-colors">Smartphones</span>
               </div>
             </Link>
             <Link to="/products?category=laptop" className="relative overflow-hidden rounded-lg group">
-              <div className="aspect-square bg-gray-200 flex items-center justify-center">
-                <span className="text-2xl font-bold text-shop-black group-hover:text-shop-blue transition-colors">Ordinateurs</span>
+              <div className="aspect-square bg-card flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground group-hover:text-shop-blue transition-colors">Ordinateurs</span>
               </div>
             </Link>
             <Link to="/products?category=audio" className="relative overflow-hidden rounded-lg group">
-              <div className="aspect-square bg-gray-200 flex items-center justify-center">
-                <span className="text-2xl font-bold text-shop-black group-hover:text-shop-blue transition-colors">Audio</span>
+              <div className="aspect-square bg-card flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground group-hover:text-shop-blue transition-colors">Audio</span>
               </div>
             </Link>
             <Link to="/products?category=wearable" className="relative overflow-hidden rounded-lg group">
-              <div className="aspect-square bg-gray-200 flex items-center justify-center">
-                <span className="text-2xl font-bold text-shop-black group-hover:text-shop-blue transition-colors">Wearables</span>
+              <div className="aspect-square bg-card flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground group-hover:text-shop-blue transition-colors">Wearables</span>
               </div>
             </Link>
           </div>
@@ -96,9 +96,9 @@ const HomePage: React.FC = () => {
       {/* Newsletter Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="bg-white p-8 rounded-lg shadow-sm border text-center max-w-2xl mx-auto">
+          <div className="bg-card p-8 rounded-lg shadow-sm border text-center max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Abonnez-vous à notre newsletter</h2>
-            <p className="text-shop-darkGray mb-6">
+            <p className="text-muted-foreground mb-6">
               Restez informé des nouveaux produits et des offres exclusives.
             </p>
             
@@ -106,7 +106,7 @@ const HomePage: React.FC = () => {
               <input 
                 type="email" 
                 placeholder="Votre adresse email" 
-                className="flex-grow px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-shop-blue focus:border-transparent"
+                className="flex-grow px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-shop-blue focus:border-transparent bg-background"
                 required
               />
               <Button className="bg-shop-blue hover:bg-blue-700">
