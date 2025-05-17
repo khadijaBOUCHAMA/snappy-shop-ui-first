@@ -99,7 +99,7 @@ const HomePage: React.FC = () => {
           <div className="bg-card p-8 rounded-lg shadow-sm border text-center max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Abonnez-vous à notre newsletter</h2>
             <p className="text-muted-foreground mb-6">
-              Restez informé des nouveaux produits et des offres exclusives.
+              Restez informé des nouveaux produits et des offres exclusives ELECTRO.
             </p>
             
             <form className="flex flex-col sm:flex-row gap-2">

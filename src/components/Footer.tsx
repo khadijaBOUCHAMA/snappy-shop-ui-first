@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -10,9 +9,9 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-bold mb-4">SnappyShop</h3>
+            <h3 className="text-lg font-bold mb-4">ELECTRO</h3>
             <p className="text-shop-darkGray text-sm mb-4">
-              Your one-stop shop for high-quality products at affordable prices.
+              Your one-stop shop for high-quality electronics at affordable prices.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-shop-blue hover:text-shop-darkGray" aria-label="Facebook">
@@ -124,7 +123,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t mt-8 pt-6 text-center text-shop-darkGray text-sm">
-          <p>&copy; {currentYear} SnappyShop. All rights reserved.</p>
+          <p>&copy; {currentYear} ELECTRO. All rights reserved.</p>
           <div className="mt-2 space-x-4">
             <a href="#" className="hover:text-shop-blue">Privacy Policy</a>
             <a href="#" className="hover:text-shop-blue">Terms of Service</a>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,13 +6,13 @@ const AboutPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">About SnappyShop</h1>
+        <h1 className="text-3xl font-bold mb-8">About ELECTRO</h1>
         
         <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-8">
           <div className="aspect-video w-full">
             <img 
               src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGUtY29tbWVyY2V8ZW58MHx8MHx8fDA%3D" 
-              alt="SnappyShop Team" 
+              alt="ELECTRO Team" 
               className="object-cover w-full h-full"
             />
           </div>
@@ -21,7 +20,7 @@ const AboutPage: React.FC = () => {
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">Our Story</h2>
             <p className="text-shop-darkGray mb-4">
-              SnappyShop was founded in 2023 with a simple mission: to provide high-quality products at affordable prices with exceptional customer service. We believe that online shopping should be easy, convenient, and enjoyable.
+              ELECTRO was founded in 2023 with a simple mission: to provide high-quality electronic products at affordable prices with exceptional customer service. We believe that online shopping should be easy, convenient, and enjoyable.
             </p>
             <p className="text-shop-darkGray">
               Our team of dedicated professionals works tirelessly to source the best products, ensure fast shipping, and provide excellent customer support. We're committed to creating a positive shopping experience for all our customers.
@@ -31,7 +30,7 @@ const AboutPage: React.FC = () => {
         
         {/* Why Choose Us */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">Why Choose SnappyShop</h2>
+          <h2 className="text-2xl font-bold mb-6">Why Choose ELECTRO</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-sm border p-6">
