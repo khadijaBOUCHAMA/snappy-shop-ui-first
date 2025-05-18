@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { LogIn } from "lucide-react";
+import { signInWithEmail } from "@/services/authService";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Adresse email invalide" }),
@@ -16,6 +17,9 @@ const formSchema = z.object({
 });
 
 const LoginPage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -24,13 +28,22 @@ const LoginPage: React.FC = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("Login credentials:", values);
-    // To be implemented with authentication backend
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
+    
+    try {
+      const { data, error } = await signInWithEmail(values.email, values.password);
+      
+      if (!error && data) {
+        navigate('/');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Connexion</CardTitle>
@@ -48,7 +61,7 @@ const LoginPage: React.FC = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="exemple@email.com" type="email" {...field} />
+                      <Input placeholder="exemple@email.com" type="email" {...field} disabled={loading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -61,14 +74,14 @@ const LoginPage: React.FC = () => {
                   <FormItem>
                     <FormLabel>Mot de passe</FormLabel>
                     <FormControl>
-                      <Input placeholder="••••••••" type="password" {...field} />
+                      <Input placeholder="••••••••" type="password" {...field} disabled={loading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full bg-shop-blue hover:bg-blue-700">
-                <LogIn className="mr-2 h-4 w-4" /> Se connecter
+              <Button type="submit" className="w-full bg-shop-blue hover:bg-blue-700" disabled={loading}>
+                <LogIn className="mr-2 h-4 w-4" /> {loading ? "Connexion en cours..." : "Se connecter"}
               </Button>
             </form>
           </Form>
