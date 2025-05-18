@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -24,14 +25,14 @@ import ProfilePage from "./pages/ProfilePage";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const AppWithProviders = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <CartProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <AuthProvider>
             <div className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-grow bg-background">
@@ -52,11 +53,17 @@ const App = () => (
               </main>
               <Footer />
             </div>
-          </BrowserRouter>
+          </AuthProvider>
         </TooltipProvider>
       </CartProvider>
     </ThemeProvider>
   </QueryClientProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppWithProviders />
+  </BrowserRouter>
 );
 
 export default App;

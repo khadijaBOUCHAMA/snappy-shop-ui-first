@@ -1,15 +1,18 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/context/CartContext";
 import { ShoppingCart, Menu, X, Search, LogIn, Sun, Moon, UserRound } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { useAuth } from "@/context/AuthContext";
+import LogoutButton from "./LogoutButton";
 
 const Navbar: React.FC = () => {
   const { totalItems } = useCart();
   const { theme, setTheme } = useTheme();
+  const { isAuthenticated } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -93,17 +96,23 @@ const Navbar: React.FC = () => {
 
             {/* Auth Buttons - Desktop */}
             <div className="hidden md:flex space-x-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/login">
-                  <LogIn className="h-4 w-4 mr-1" />
-                  Connexion
-                </Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link to="/signup">
-                  Inscription
-                </Link>
-              </Button>
+              {isAuthenticated ? (
+                <LogoutButton />
+              ) : (
+                <>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/login">
+                      <LogIn className="h-4 w-4 mr-1" />
+                      Connexion
+                    </Link>
+                  </Button>
+                  <Button size="sm" asChild>
+                    <Link to="/signup">
+                      Inscription
+                    </Link>
+                  </Button>
+                </>
+              )}
             </div>
             
             {/* Mobile Menu Toggle */}
@@ -169,16 +178,22 @@ const Navbar: React.FC = () => {
               Profile
             </Link>
             <div className="flex space-x-2 px-2 py-1">
-              <Button variant="outline" size="sm" asChild className="flex-1">
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  Connexion
-                </Link>
-              </Button>
-              <Button size="sm" asChild className="flex-1">
-                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
-                  Inscription
-                </Link>
-              </Button>
+              {isAuthenticated ? (
+                <LogoutButton />
+              ) : (
+                <>
+                  <Button variant="outline" size="sm" asChild className="flex-1">
+                    <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                      Connexion
+                    </Link>
+                  </Button>
+                  <Button size="sm" asChild className="flex-1">
+                    <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                      Inscription
+                    </Link>
+                  </Button>
+                </>
+              )}
             </div>
           </nav>
         )}

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { LogIn } from "lucide-react";
 import { signInWithEmail } from "@/services/authService";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Adresse email invalide" }),
@@ -19,6 +20,7 @@ const formSchema = z.object({
 const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -27,6 +29,13 @@ const LoginPage: React.FC = () => {
       password: "",
     },
   });
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
@@ -41,6 +50,10 @@ const LoginPage: React.FC = () => {
       setLoading(false);
     }
   };
+
+  if (isAuthenticated) {
+    return null; // Prevent flash of login page when redirecting
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
