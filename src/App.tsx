@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -60,10 +61,12 @@ const AppWithProviders = () => (
   </QueryClientProvider>
 );
 
-const App = () => (
-  <BrowserRouter>
-    <AppWithProviders />
-  </BrowserRouter>
-);
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AppWithProviders />
+    </BrowserRouter>
+  );
+};
 
 export default App;
