@@ -4,20 +4,24 @@ import ProductCard from "@/components/ProductCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Search, ChevronDown, ChevronUp } from "lucide-react";
+import { Search, ChevronDown, ChevronUp, Edit, Trash2 } from "lucide-react";
 import { Product } from "@/types";
 import { categories } from "@/data/products";
+import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductListProps {
   products: Product[];
+  isAdmin?: boolean;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+const ProductList: React.FC<ProductListProps> = ({ products, isAdmin = false }) => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showInStock, setShowInStock] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     let result = products;
@@ -50,6 +54,15 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
       } else {
         return [...prev, category];
       }
+    });
+  };
+
+  const handleDeleteProduct = (productId: string) => {
+    // In a real application, we would delete the product from the database
+    // For now, we'll just show a toast message
+    toast({
+      title: "Delete Product",
+      description: `Product ${productId} would be deleted.`,
     });
   };
 
@@ -123,7 +136,32 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <div key={product.id} className="relative">
+                  <ProductCard product={product} />
+                  
+                  {isAdmin && (
+                    <div className="absolute top-2 right-2 flex space-x-1">
+                      <Link to={`/products/edit/${product.id}`}>
+                        <Button size="sm" variant="outline" className="bg-white bg-opacity-80 hover:bg-opacity-100 p-1 h-8 w-8">
+                          <Edit className="h-4 w-4" />
+                          <span className="sr-only">Edit</span>
+                        </Button>
+                      </Link>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="bg-white bg-opacity-80 hover:bg-opacity-100 p-1 h-8 w-8 hover:text-red-500"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDeleteProduct(product.id);
+                        }}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           )}

@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import CreateProductPage from "./pages/CreateProductPage";
+import EditProductPage from "./pages/EditProductPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderPage from "./pages/OrderPage";
@@ -41,6 +43,8 @@ const AppWithProviders = () => (
                   <Route path="/" element={<Index />} />
                   <Route path="/products" element={<ProductsPage />} />
                   <Route path="/products/:productId" element={<ProductDetailPage />} />
+                  <Route path="/products/create" element={<CreateProductPage />} />
+                  <Route path="/products/edit/:productId" element={<EditProductPage />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="/order/:orderId" element={<OrderPage />} />
