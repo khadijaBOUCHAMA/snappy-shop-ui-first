@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
-            {/* Profile */}
+            {/* Profile - Cette ligne est modifiée pour rediriger vers /profile sans condition */}
             <Link to="/profile">
               <Button variant="ghost" size="icon">
                 <UserRound className="h-5 w-5" />
